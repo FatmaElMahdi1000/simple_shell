@@ -2,24 +2,23 @@
 
 /**
  *myenv - environment
- *Return: 0 success, 1 failure 
+*Return: 0 success, 1 failure
 **/
 
-int myenv()
+int myenv(void)
 {
 	int exc = 0;
 	char *executable_name;
 	char buffer[100];
 	FILE *file = fopen("envscript.txt", "r");
 
-	if(file == NULL) {
-		return 1;
-	}
+	if (file == NULL)
+		return (1);
 
-	if(fgets(buffer , sizeof(buffer), file) == NULL) /**read from the file**/
+	if (fgets(buffer, sizeof(buffer), file) == NULL) /**read from the file**/
 	{
-		fclose(file);	
-		return 1;
+		fclose(file);
+		return (1);
 	}
 
 	executable_name = strrchr(buffer, '/');
@@ -46,5 +45,6 @@ int myenv()
 
 	}
 	fclose(file);
-	return -1;
+	return (-1);
 }
+

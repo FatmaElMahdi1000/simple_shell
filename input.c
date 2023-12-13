@@ -2,7 +2,7 @@
 
 /**
  *input - receives user's input
- *@buffer: the input, type is string
+ *@str: passing a command.
  *Return: 0
 */
 
@@ -12,7 +12,6 @@ void input(char *buffer, size_t size)
 {
 	while (1)
 	{
-	
 	promptt();
 
 	if (fgets(buffer, size, stdin) != NULL)
@@ -20,7 +19,8 @@ void input(char *buffer, size_t size)
 		buffer[strcspn(buffer, "\n")] = '\0';
 		execution(buffer);
 	}
-	else{
+	else
+	{
 		if (feof(stdin))
 		{
 			exit(EXIT_SUCCESS);
