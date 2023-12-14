@@ -5,8 +5,6 @@
  *Return: Null, zero
 */
 
-void promptt(void);
-
 void execution(char *str)
 {
 	pid_t childprocess = fork();
