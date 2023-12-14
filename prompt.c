@@ -7,6 +7,5 @@
 void promptt(void)
 {
 	prnt("Myshell$ ");
-	fflush(stdout);
 }
 
