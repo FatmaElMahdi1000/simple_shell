@@ -6,8 +6,6 @@
  *Return: 0
 */
 
-void execution(char *str);
-
 void input(char *buffer, size_t size)
 {
 	while (1)

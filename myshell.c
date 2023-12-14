@@ -7,13 +7,12 @@
 
 int main(void)
 {
-	char str[300];
 	char buffer[300];
 
 	while (1)
 	{
 		input(buffer, sizeof(buffer));
-		execution(str);
+		execution(buffer);
 	}
 	return (0);
 }
