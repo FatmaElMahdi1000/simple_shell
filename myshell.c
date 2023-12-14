@@ -11,8 +11,8 @@ int main(void)
 
 	while (1)
 	{
+		promptt();
 		input(buffer, sizeof(buffer));
-		execution(buffer);
 	}
 	return (0);
 }
