@@ -11,6 +11,7 @@ void input(char *buffer, size_t size)
 {
 	while (1)
 	{
+		promptt();
 
 	if (fgets(buffer, size, stdin) != NULL)
 	{
