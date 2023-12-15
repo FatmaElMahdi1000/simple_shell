@@ -2,7 +2,8 @@
 
 /**
  *input - receives user's input
- *@str: passing a command.
+ *@buffer: storing the input
+ *@size: input size of memory
  *Return: 0
 */
 
