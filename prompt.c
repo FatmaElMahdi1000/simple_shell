@@ -6,7 +6,8 @@
 */
 void promptt(void)
 {
+	if (isatty(fileno(stdin))) {
 	prnt("Myshell$ ");
-	fflush(stdout);
+}
 }
 
