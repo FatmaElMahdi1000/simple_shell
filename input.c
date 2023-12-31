@@ -9,17 +9,14 @@
 
 void input(char *buffer, size_t size)
 {
-	while (1)
-	{
-		promptt();
+	promptt();
 
-	if (fgets(buffer, size, stdin) != NULL)
+	while(fgets(buffer, size, stdin))
 	{
 		buffer[strcspn(buffer, "\n")] = '\0';
 		execution(buffer);
+		promptt();
 	}
-	else
-	{
 		if (feof(stdin))
 		{
 			exit(EXIT_SUCCESS);
@@ -29,6 +26,3 @@ void input(char *buffer, size_t size)
 			exit(EXIT_FAILURE);
 		}
 	}
-}
-promptt();
-}
