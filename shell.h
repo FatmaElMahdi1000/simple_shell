@@ -14,7 +14,8 @@
 /**prototypes**/ 
 void execution(char **argv);
 char *getpath(char *command);
-
-
+void free_arguments(char **argv);
+void read_input(char **buffer, char **buffer_copy, size_t *size,ssize_t *whattoread);
+void tokenize_input(char *buffer, char *buffer_copy, char ***argv, int *token_numbers);
 
 #endif
