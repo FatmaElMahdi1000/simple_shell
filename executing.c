@@ -4,27 +4,14 @@
  *@str: commands/arguments
  *Return: Null, zero
 */
+
 void execution(char *str)
 {
 	pid_t childprocess = fork();
-	char *status_str, int status, char *endptr;
-
-	if (strncmp(str, "exit", 4) == 0)
+/**Handling exit command**/
+	if (strcmp(str, "exit") == 0)
 	{
-		status_str = strtok(str + 5, " ");
-		status = EXIT_SUCCESS;
-
-		if (status_str != NULL)
-		{
-			status = strtol(status_str, &endptr, 10);
-
-			if (*endptr != '\0')
-			{
-				fprintf(stderr, "Invalid exit status: %s\n", status_str);
-				return;
-			}
-		}
-		exit(status);
+		exit(EXIT_SUCCESS);
 	}
 
 	if (childprocess == -1)
@@ -33,11 +20,14 @@ void execution(char *str)
 		exit(EXIT_FAILURE);
 	}
 	else if (childprocess == 0)
-	{
-		char *args[300], int argcount = 0, char *token, char *delim = " ";
-		
+	{ /**parsing**/
+		char *args[300];/**storing memory for command**/
+		int argcount = 0; /**counting no. of args in command**/
+		char *token; /*for tokenization**/
+		char *delim = " "; /**tokenize with space**/
+
 		token = strtok(str, delim);
-		
+
 		while (token != NULL && argcount < 299)
 		{
 			args[argcount++] = token;
@@ -50,9 +40,9 @@ void execution(char *str)
 			perror("execvp");
 			exit(EXIT_FAILURE);
 		}
-	}
-	else
-	{
-		waitpid(childprocess, NULL, 0);
-	}
+}
+else
+{
+	waitpid(childprocess, NULL, 0);
+}
 }
