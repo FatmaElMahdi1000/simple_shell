@@ -1,9 +1,9 @@
-#include"myshell.h"
+#include "myshell.h"
 /**
- *execution - executing process
- *@str: commands/arguments
- *Return: Null, zero
-*/
+ * execution - executing process
+ * @str: commands/arguments
+ * Return: Null, zero
+ */
 
 void execution(char *str)
 {
@@ -21,10 +21,11 @@ void execution(char *str)
 	}
 	else if (childprocess == 0)
 	{ /**parsing**/
-		char *args[300];/**storing memory for command**/
+		char *args[300]; /**storing memory for command**/
 		int argcount = 0; /**counting no. of args in command**/
 		char *token; /*for tokenization**/
 		char *delim = " "; /**tokenize with space**/
+		char *envp[] = {NULL}; /**environment variables (if needed)**/
 
 		token = strtok(str, delim);
 
@@ -35,14 +36,14 @@ void execution(char *str)
 		}
 		args[argcount] = NULL;
 
-		if (execvp(args[0], args) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
-			perror("execvp");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
-}
-else
-{
-	waitpid(childprocess, NULL, 0);
-}
+	}
+	else
+	{
+		waitpid(childprocess, NULL, 0);
+	}
 }
