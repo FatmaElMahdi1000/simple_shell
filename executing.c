@@ -1,50 +1,48 @@
 #include"myshell.h"
 /**
- * execution - Executes a command parsed from input.
- * @str: The command to execute.
- *
-* Return: Nothing.
- */
+ *execution - executing process
+ *@str: commands/arguments
+ *Return: Null, zero
+*/
+
 void execution(char *str)
 {
-	pid_t childprocess;
-	char *args[MAX_ARGS]; /* Array to hold command and NULL */
-	char *token;
-	char *delim = " ";
-
+	pid_t childprocess = fork();
+/**Handling exit command**/
 	if (strcmp(str, "exit") == 0)
 	{
 		exit(EXIT_SUCCESS);
 	}
 
-	token = strtok(str, delim);
-
-	if (token != NULL)
+	if (childprocess == -1)
 	{
-		args[0] = token; /* Command to execute */
-		args[1] = NULL;
-		childprocess = fork();
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (childprocess == 0)
+	{ /**parsing**/
+		char *args[300];/**storing memory for command**/
+		int argcount = 0; /**counting no. of args in command**/
+		char *token; /*for tokenization**/
+		char *delim = " "; /**tokenize with space**/
 
-		if (childprocess == -1)
+		token = strtok(str, delim);
+
+		while (token != NULL && argcount < 299)
 		{
-			perror("fork");
+			args[argcount++] = token;
+			token = strtok(NULL, delim);
+		}
+		args[argcount] = NULL;
+
+		if (execvp(args[0], args) == -1)
+		{
+			perror("execvp");
 			exit(EXIT_FAILURE);
 		}
-		else if (childprocess == 0)
-		{
-			if (execve(args[0], args, NULL) == -1)
-			{
-				perror("execve");
-				exit(EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			waitpid(childprocess, NULL, 0);
-		}
-	}
-	else
-	{
-		fprintf(stderr, "No command entered\n");
-	}
+}
+else
+{
+	waitpid(childprocess, NULL, 0);
+}
 }
