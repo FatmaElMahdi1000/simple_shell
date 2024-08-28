@@ -11,7 +11,7 @@ void input(char *buffer, size_t size)
 {
 	promptt();
 
-	while(fgets(buffer, size, stdin))
+	while (fgets(buffer, size, stdin))
 	{
 		buffer[strcspn(buffer, "\n")] = '\0';
 		execution(buffer);

@@ -6,8 +6,8 @@
 */
 void promptt(void)
 {
-	if (isatty(fileno(stdin))) {
+	if (isatty(fileno(stdin)))
+	{
 	prnt("Myshell$ ");
 }
 }
-
